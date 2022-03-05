@@ -1,6 +1,6 @@
 require("dotenv").config()
 
-import {Client, Intents, Interaction, Message} from "discord.js"
+import { Client, Intents, Interaction, Message } from "discord.js"
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 
@@ -15,6 +15,35 @@ client.on('messageCreate', message => {
 // const joinStates = new Map()
 const rankings = new Map()
 
+client.on('messageCreate', function (message) {
+    const userId = message.member.user.id;
+    if (message.content === '/time') {
+        message.channel.send(`${message.member.user.username} ist seit ${rankings.get(userId)} Sekunden auf dem Server.`);
+    }
+});
+
+    /*client.on("ready", client => {
+    console.log("Testchen")
+    setInterval(() => {
+        const userId = client.user.id
+        if (rankings.get(userId) === 5)
+            client.channels.cache.get('948614963092668449').send('Hello here!');
+}, 1000)
+    })*/
+
+    /*client.on("ready", client => {
+        console.log("Testchen")
+        setInterval(() => {
+            for (let userId in rankings) {
+                console.log(userId)
+                if (rankings.get(userId) === 5) {
+                    client.channels.cache.get("948614963092668449").send('Hello here!');
+                }
+            }
+        }, 1000)
+    })*/
+
+
 client.on('voiceStateUpdate', (oldState, newState) => {
     const userId = oldState.member.user.id;
     const username = oldState.member.user.username;
@@ -23,22 +52,22 @@ client.on('voiceStateUpdate', (oldState, newState) => {
         rankings.set(userId, 0)
     }
 
-    let interval: NodeJS.Timeout = null; 
+    let interval: NodeJS.Timeout = null;
 
     if (oldState.channelId === null && newState.channelId !== null) {
-        interval = setInterval(function() {
+        const iid = setInterval(function () {
             rankings.set(userId, rankings.get(userId) + 1)
-            console.log(rankings.get(userId))
+                console.log(rankings.get(userId))
             if (rankings.get(userId) === 5) {
                 console.log(`${username} ist seit 5 Sekunden auf dem Sever.`)
             }
-        }, 1000)
-
-        client.on('messageCreate', function(messageCreate) {
-            if (messageCreate.content === '/time') {
-             messageCreate.channel.send(`Du bist seit ${rankings.get(userId)} Sekunden auf dem Server`);
+            if (rankings.get(userId) === 10){
+                client.channels.cache.get('948614963092668449').send(`${username} ist seit 10 Sekunden auf dem Server.`)
             }
-           });
+            if (rankings.get(userId) === 3600){
+                client.channels.cache.get('948614963092668449').send(`${username} hat Level 1 erreicht.`)
+            }
+        }, 1000)   
 
     } else if (newState.channelId === null && oldState.channelId !== null) {
         console.log(`${username} hat den Server verlassen.`, interval)
