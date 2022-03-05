@@ -15,7 +15,6 @@ client.on('messageCreate', message => {
 // const joinStates = new Map()
 const rankings = new Map()
 
-
 client.on('voiceStateUpdate', (oldState, newState) => {
     const userId = oldState.member.user.id;
     const username = oldState.member.user.username;
@@ -31,12 +30,18 @@ client.on('voiceStateUpdate', (oldState, newState) => {
             rankings.set(userId, rankings.get(userId) + 1)
             console.log(rankings.get(userId))
             if (rankings.get(userId) === 5) {
-                console.log(`${username} ist seit 5 Sekunden auf dem Sever`)
+                console.log(`${username} ist seit 5 Sekunden auf dem Sever.`)
             }
         }, 1000)
 
+        client.on('messageCreate', function(messageCreate) {
+            if (messageCreate.content === '/time') {
+             messageCreate.channel.send(`Du bist seit ${rankings.get(userId)} Sekunden auf dem Server`);
+            }
+           });
+
     } else if (newState.channelId === null && oldState.channelId !== null) {
-        console.log("Left channel", interval)
+        console.log(`${username} hat den Server verlassen.`, interval)
         clearInterval(interval)
     }
 
