@@ -16,11 +16,6 @@ client.on('messageCreate', message => {
 const rankings = new Map()
 
 
-/* client.on('message', message => {
-    if (rankings = 1000)
-        schreibe in chat UserXY ist seit XY minuten in einem Voce Channel
-        }) */
-
 client.on('voiceStateUpdate', (oldState, newState) => {
     const userId = oldState.member.user.id;
     const username = oldState.member.user.username;
