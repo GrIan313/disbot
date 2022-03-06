@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 import { Client, Intents, Interaction, Message } from "discord.js"
+import { ALL } from "dns";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 
@@ -23,57 +24,45 @@ client.on('messageCreate', function (message) {
 });
 
     /*client.on("ready", client => {
-    console.log("Testchen")
-    setInterval(() => {
-        const userId = client.user.id
-        if (rankings.get(userId) === 5)
-            client.channels.cache.get('948614963092668449').send('Hello here!');
-}, 1000)
-    })*/
-
-    /*client.on("ready", client => {
         console.log("Testchen")
         setInterval(() => {
-            for (let userId in rankings) {
-                console.log(userId)
-                if (rankings.get(userId) === 5) {
-                    client.channels.cache.get("948614963092668449").send('Hello here!');
-                }
-            }
-        }, 1000)
+            client.channels.cache.get("948614963092668449").send('Hello here!');
+                
+        }, 5000)
     })*/
 
 
-client.on('voiceStateUpdate', (oldState, newState) => {
-    const userId = oldState.member.user.id;
-    const username = oldState.member.user.username;
-
-    if (!rankings.has(userId)) {
-        rankings.set(userId, 0)
-    }
-
-    let interval: NodeJS.Timeout = null;
-
-    if (oldState.channelId === null && newState.channelId !== null) {
-        const iid = setInterval(function () {
-            rankings.set(userId, rankings.get(userId) + 1)
-                console.log(rankings.get(userId))
-            if (rankings.get(userId) === 5) {
-                console.log(`${username} ist seit 5 Sekunden auf dem Sever.`)
+    client.on('voiceStateUpdate', (oldState, newState) => {
+        const userId = oldState.member.user.id;
+        const username = oldState.member.user.username;
+    
+        if (!rankings.has(userId)) {
+            rankings.set(userId, 0)
+        }
+    
+        //let interval: NodeJS.Timeout = null;
+    
+        if (oldState.channelId === null && newState.channelId !== null) {
+            const iid = setInterval(function () {
+                rankings.set(userId, rankings.get(userId) + 1)
+                    console.log(rankings.get(userId))
+            if (newState.channelId === null && oldState.channelId === null) {
+                console.log(`${username} hat den Server verlassen.`)
+                clearInterval(iid)
             }
-            if (rankings.get(userId) === 10){
-                client.channels.cache.get('948614963092668449').send(`${username} ist seit 10 Sekunden auf dem Server.`)
-            }
-            if (rankings.get(userId) === 3600){
-                client.channels.cache.get('948614963092668449').send(`${username} hat Level 1 erreicht.`)
-            }
-        }, 1000)   
+    
+                if (rankings.get(userId) === 5) {
+                    console.log(`${username} ist seit 5 Sekunden auf dem Sever.`)
+                }
 
-    } else if (newState.channelId === null && oldState.channelId !== null) {
-        console.log(`${username} hat den Server verlassen.`, interval)
-        clearInterval(interval)
-    }
+                if (rankings.get(userId) === 30){
+                    client.channels.cache.get('948614963092668449').send(`${username} ist seit 30 Sekunden auf dem Server.`)
+                }
 
-});
+            }, 1000)   
+    
+        }  
+    
+    });
 
 client.login(process.env.DISCORD_BOT_TOKEN)
