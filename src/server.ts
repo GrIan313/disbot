@@ -4,18 +4,21 @@ import { Client, Intents } from "discord.js"
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 
+// zeigt an das der Bot auf dem Server ist
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
+// zeigt nachrichten in der Console an
 client.on('messageCreate', message => {
     console.log(message.author.username + " : " + message.content);
 });
 
-// const joinStates = new Map()
+// tracker um die zeiten zu speichern
 const allTime = new Map()
 const sesTime = new Map()
 
+// Command um sich die sessiontime anzeigen zu lassen
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
     if (message.content === '/session') {
@@ -23,6 +26,7 @@ client.on('messageCreate', function (message) {
     }
 });
 
+// Command um sich die alltime anzeigen zu lassen
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
     if (message.content === '/alltime') {
@@ -30,15 +34,7 @@ client.on('messageCreate', function (message) {
     }
 });
 
-    /*client.on("ready", client => {
-        console.log("Testchen")
-        setInterval(() => {
-            client.channels.cache.get("948614963092668449").send('Hello here!');
-                
-        }, 5000)
-    })*/
-
-    //Overall Time
+    // Funktion um alltime zu tracken + lvl anzeige
 
     client.on('voiceStateUpdate', (oldState, newState) => {
         const userId = oldState.member.user.id;
@@ -47,8 +43,6 @@ client.on('messageCreate', function (message) {
         if (!allTime.has(userId)) {
             allTime.set(userId, 0)
         }
-    
-        //let interval: NodeJS.Timeout = null;
     
         if (oldState.channelId === null && newState.channelId !== null) {
             const iid = setInterval(function () {
@@ -106,8 +100,8 @@ client.on('messageCreate', function (message) {
         }     
     });
 
-    //Session Time
 
+    // Funktion um sessiontime zu tracken
     client.on('voiceStateUpdate', (oldState, newState) => {
         const userId = oldState.member.user.id;
         const username = oldState.member.user.username;
