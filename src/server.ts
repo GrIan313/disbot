@@ -18,14 +18,14 @@ const sesTime = new Map()
 
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
-    if (message.content === '/time') {
+    if (message.content === '/session') {
         message.channel.send(`${message.member.user.username} nervt jetzt schon ${sesTime.get(userId)} Sekunden am Stück.`);
     }
 });
 
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
-    if (message.content === '/time') {
+    if (message.content === '/alltime') {
         message.channel.send(`${message.member.user.username} labert jetzt schon insgesamt seit ${allTime.get(userId)} Stunden.`);
     }
 });
