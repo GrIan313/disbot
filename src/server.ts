@@ -18,19 +18,27 @@ client.on('messageCreate', message => {
 const allTime = new Map()
 const sesTime = new Map()
 
+// Command um sich die Commands anzeigen zu lassen
+client.on('messageCreate', function (message) {
+    const userId = message.member.user.id;
+    if (message.content === '!help') {
+        message.channel.send(`Zur verfügung steht der !session Command, welcher einem die Session Zeit anzeigen lässt und der !alltime Command, welcher einem die Gesamtzeit auf allen Voicechannel liefert!`);
+    }
+});
+
 // Command um sich die sessiontime anzeigen zu lassen
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
-    if (message.content === '/session') {
-        message.channel.send(`${message.member.user.username} nervt jetzt schon ${sesTime.get(userId)} Sekunden am Stück.`);
+    if (message.content === '!session') {
+        message.channel.send(`${message.member.user.username} nervt jetzt schon ${sesTime.get(userId)/3600} Stunden am Stück.`);
     }
 });
 
 // Command um sich die alltime anzeigen zu lassen
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
-    if (message.content === '/alltime') {
-        message.channel.send(`${message.member.user.username} labert jetzt schon insgesamt seit ${allTime.get(userId)} Stunden.`);
+    if (message.content === '!alltime') {
+        message.channel.send(`${message.member.user.username} labert jetzt schon insgesamt seit ${allTime.get(userId)/3600} Stunden.`);
     }
 });
 
@@ -52,48 +60,48 @@ client.on('messageCreate', function (message) {
                 console.log(`${username} hat den Server verlassen.`)
                 clearInterval(iid)
             }   
-                if (allTime.get(userId) === 10){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 0 erreicht. Herzlichen Glückwunsch!`)
+                if (allTime.get(userId) === 20){
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 0 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 36000){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 1 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 1 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 54000){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 2 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 2 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 81000){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 3 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 3 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 121500){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 4 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 4 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 182250){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 5 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 5 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 273375){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 6 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 6 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 410062){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 7 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 7 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 615093){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 8 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 8 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 922639){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 9 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 9 erreicht. Herzlichen Glückwunsch!`)
                 }
 
                 if (allTime.get(userId) === 1383958){
-                    client.channels.cache.get('948614963092668449').send(`${username} hat Level 10 erreicht. Herzlichen Glückwunsch!`)
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 10 erreicht. Herzlichen Glückwunsch!`)
                 }
 
             }, 1000)      
