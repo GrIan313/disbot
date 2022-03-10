@@ -30,7 +30,7 @@ client.on('messageCreate', function (message) {
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
     if (message.content === '!session') {
-        message.channel.send(`${message.member.user.username} nervt jetzt schon ${sesTime.get(userId)/3600} Stunden am Stück.`);
+        message.channel.send(`${message.member.user.username} nervt jetzt schon ${Math.round((sesTime.get(userId)/3600)*100)/100} Stunden am Stück.`);
     }
 });
 
@@ -38,7 +38,7 @@ client.on('messageCreate', function (message) {
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
     if (message.content === '!alltime') {
-        message.channel.send(`${message.member.user.username} labert jetzt schon insgesamt seit ${allTime.get(userId)/3600} Stunden.`);
+        message.channel.send(`${message.member.user.username} labert jetzt schon insgesamt seit ${Math.round((allTime.get(userId)/3600)*100)/100} Stunden.`);
     }
 });
 
@@ -114,22 +114,17 @@ client.on('messageCreate', function (message) {
         const userId = oldState.member.user.id;
         const username = oldState.member.user.username;
     
-        if (!sesTime.has(userId)) {
+        if (newState.channelId === null && oldState.channelId !== null)
             sesTime.set(userId, 0)
-        }
 
-        if (sesTime.has(userId)) {
-            sesTime.set(userId, 0)
-        }
-    
         if (oldState.channelId === null && newState.channelId !== null) {
             var iid = setInterval(function () {
                 sesTime.set(userId, sesTime.get(userId) + 1)
                     console.log(sesTime.get(userId))
-            if (newState.channelId === null && oldState.channelId === null) {
-                console.log(`${username} hat den Server verlassen.`)
-                clearInterval(iid)
-            }   
+        if (newState.channelId === null && oldState.channelId === null) {
+            console.log(`${username} hat die Session beendet.`)
+            clearInterval(iid)
+            }  
         }, 1000)      
         }     
     });
