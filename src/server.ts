@@ -113,6 +113,10 @@ client.on('messageCreate', function (message) {
     client.on('voiceStateUpdate', (oldState, newState) => {
         const userId = oldState.member.user.id;
         const username = oldState.member.user.username;
+
+        if (!sesTime.has(userId)) {
+            sesTime.set(userId, 0)
+        }
     
         if (newState.channelId === null && oldState.channelId !== null)
             sesTime.set(userId, 0)
