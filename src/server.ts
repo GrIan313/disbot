@@ -102,9 +102,6 @@ client.on('messageCreate', function (message) {
                 console.log(`${username} hat den Server verlassen.`)
                 clearInterval(iid)
             }   
-                /*if (allTime.get(userId) === 20){
-                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 0 erreicht. Herzlichen Glückwunsch!`)
-                }*/
 
                 if (allTime.get(userId) === 36000){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 1 erreicht. Herzlichen Glückwunsch!`)
