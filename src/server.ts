@@ -4,6 +4,7 @@ import { Client, Intents } from "discord.js"
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] });
 
+
 // zeigt an das der Bot auf dem Server ist
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -11,7 +12,7 @@ client.once('ready', () => {
 
 // zeigt nachrichten in der Console an
 client.on('messageCreate', message => {
-    console.log(message.author.username + " : " + message.content);
+    console.log(message.author.username + ": " + message.content);
 });
 
 // tracker um die zeiten zu speichern
@@ -42,6 +43,47 @@ client.on('messageCreate', function (message) {
     }
 });
 
+// Command Level anzeigen
+client.on('messageCreate', function (message) {
+    const userId = message.member.user.id;
+    if (message.content === '!level') {
+        if (allTime.get(userId) < 36000)
+            message.channel.send(`${message.member.user.username} du bist Level 0.`);
+
+        if (allTime.get(userId) >= 36000  && allTime.get(userId) < 54000)
+            message.channel.send(`${message.member.user.username} du bist Level 1.`);
+
+        if (allTime.get(userId) >= 54000 && allTime.get(userId) < 81000)
+            message.channel.send(`${message.member.user.username} du bist Level 2.`);
+
+        if (allTime.get(userId) >= 81000  && allTime.get(userId) < 121500)
+            message.channel.send(`${message.member.user.username} du bist Level 3.`);
+
+        if (allTime.get(userId) >= 121500 && allTime.get(userId) < 182250)
+            message.channel.send(`${message.member.user.username} du bist Level 4.`);
+
+        if (allTime.get(userId) >= 182250 && allTime.get(userId) < 273375)
+            message.channel.send(`${message.member.user.username} du bist Level 5.`);
+
+        if (allTime.get(userId) >= 273375 && allTime.get(userId) < 410062)
+            message.channel.send(`${message.member.user.username} du bist Level 6.`);
+
+        if (allTime.get(userId) >= 410062 && allTime.get(userId) < 615093)
+            message.channel.send(`${message.member.user.username} du bist Level 7.`);
+
+        if (allTime.get(userId) >= 615093 && allTime.get(userId) < 922639)
+            message.channel.send(`${message.member.user.username} du bist Level 8.`);
+
+        if (allTime.get(userId) >= 922639 && allTime.get(userId) < 1383958)
+            message.channel.send(`${message.member.user.username} du bist Level 9.`);
+
+        if (allTime.get(userId) >= 1383958)
+            message.channel.send(`${message.member.user.username} du bist Level 10.`);
+    }
+});
+
+
+
     // Funktion um alltime zu tracken + lvl anzeige
 
     client.on('voiceStateUpdate', (oldState, newState) => {
@@ -60,9 +102,9 @@ client.on('messageCreate', function (message) {
                 console.log(`${username} hat den Server verlassen.`)
                 clearInterval(iid)
             }   
-                if (allTime.get(userId) === 20){
+                /*if (allTime.get(userId) === 20){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 0 erreicht. Herzlichen Glückwunsch!`)
-                }
+                }*/
 
                 if (allTime.get(userId) === 36000){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 1 erreicht. Herzlichen Glückwunsch!`)
