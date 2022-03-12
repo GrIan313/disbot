@@ -54,7 +54,12 @@ client.on('messageCreate', function (message) {
     const level7 = 1.5*1.5*1.5*1.5*1.5*1.5
     const level8 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5
     const level9 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
-    const level10 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level10= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level11= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level12= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level13= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level14= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+
     if (message.content === '!level') {
         if (allTime.get(userId) < 36000)
             message.channel.send(`${message.member.user.username} du bist Level 0.`);
@@ -86,8 +91,20 @@ client.on('messageCreate', function (message) {
         if (allTime.get(userId) >= 36000*level9 && allTime.get(userId) < 36000*level10)
             message.channel.send(`${message.member.user.username} du bist Level 9.`);
 
-        if (allTime.get(userId) >= 36000*level10)
+        if (allTime.get(userId) >= 36000*level10 && allTime.get(userId) < 36000*level11)
             message.channel.send(`${message.member.user.username} du bist Level 10.`);
+
+        if (allTime.get(userId) >= 36000*level11 && allTime.get(userId) < 36000*level12)
+            message.channel.send(`${message.member.user.username} du bist Level 11.`);
+
+        if (allTime.get(userId) >= 36000*level12 && allTime.get(userId) < 36000*level13)
+            message.channel.send(`${message.member.user.username} du bist Level 12.`);
+            
+        if (allTime.get(userId) >= 36000*level13 && allTime.get(userId) < 36000*level14)
+            message.channel.send(`${message.member.user.username} du bist Level 13.`);
+
+        if (allTime.get(userId) >= 36000*level14)
+            message.channel.send(`${message.member.user.username} du bist Level 14.`);
     }
 });
 
@@ -106,7 +123,10 @@ client.on('messageCreate', function (message) {
         const level8 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5
         const level9 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
         const level10 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
-
+        const level11= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+        const level12= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+        const level13= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+        const level14= 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
 
 
 
@@ -167,6 +187,22 @@ client.on('messageCreate', function (message) {
 
                 if (allTime.get(userId) === 36000*level10){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 10 erreicht. Herzlichen Glückwunsch!`)
+                }
+
+                if (allTime.get(userId) === 36000*level11){
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 11 erreicht. Herzlichen Glückwunsch!`)
+                }
+
+                if (allTime.get(userId) === 36000*level12){
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 12 erreicht. Herzlichen Glückwunsch!`)
+                }
+
+                if (allTime.get(userId) === 36000*level13){
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 13 erreicht. Herzlichen Glückwunsch!`)
+                }
+
+                if (allTime.get(userId) === 36000*level14){
+                    client.channels.cache.get('948618213049114686').send(`${username} hat Level 14 erreicht. Herzlichen Glückwunsch!`)
                 }
 
             }, 1000)      
