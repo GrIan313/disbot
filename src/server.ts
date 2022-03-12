@@ -23,7 +23,7 @@ const sesTime = new Map()
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
     if (message.content === '!help') {
-        message.channel.send(`Zur verfügung steht der !session Command, welcher einem die Session Zeit anzeigen lässt und der !alltime Command, welcher einem die Gesamtzeit auf allen Voicechannel liefert!`);
+        message.channel.send("```!session — Zeit einer Session``````!alltime — Gesamtzeit``````!level — Levelanzeige```");
     }
 });
 
@@ -46,42 +46,50 @@ client.on('messageCreate', function (message) {
 // Command Level anzeigen
 client.on('messageCreate', function (message) {
     const userId = message.member.user.id;
+    const level2 = 1.5
+    const level3 = 1.5*1.5
+    const level4 = 1.5*1.5*1.5
+    const level5 = 1.5*1.5*1.5*1.5
+    const level6 = 1.5*1.5*1.5*1.5*1.5
+    const level7 = 1.5*1.5*1.5*1.5*1.5*1.5
+    const level8 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level9 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+    const level10 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
     if (message.content === '!level') {
         if (allTime.get(userId) < 36000)
             message.channel.send(`${message.member.user.username} du bist Level 0.`);
 
-        if (allTime.get(userId) >= 36000  && allTime.get(userId) < 54000)
+        if (allTime.get(userId) >= 36000  && allTime.get(userId) < 36000*level2)
             message.channel.send(`${message.member.user.username} du bist Level 1.`);
 
-        if (allTime.get(userId) >= 54000 && allTime.get(userId) < 81000)
+        if (allTime.get(userId) >= 36000*level2 && allTime.get(userId) < 36000*level3)
             message.channel.send(`${message.member.user.username} du bist Level 2.`);
 
-        if (allTime.get(userId) >= 81000  && allTime.get(userId) < 121500)
+        if (allTime.get(userId) >= 36000*level3  && allTime.get(userId) < 36000*level4)
             message.channel.send(`${message.member.user.username} du bist Level 3.`);
 
-        if (allTime.get(userId) >= 121500 && allTime.get(userId) < 182250)
+        if (allTime.get(userId) >= 36000*level4 && allTime.get(userId) < 36000*level5)
             message.channel.send(`${message.member.user.username} du bist Level 4.`);
 
-        if (allTime.get(userId) >= 182250 && allTime.get(userId) < 273375)
+        if (allTime.get(userId) >= 36000*level5 && allTime.get(userId) < 36000*level6)
             message.channel.send(`${message.member.user.username} du bist Level 5.`);
 
-        if (allTime.get(userId) >= 273375 && allTime.get(userId) < 410062)
+        if (allTime.get(userId) >= 36000*level6 && allTime.get(userId) < 36000*level7)
             message.channel.send(`${message.member.user.username} du bist Level 6.`);
 
-        if (allTime.get(userId) >= 410062 && allTime.get(userId) < 615093)
+        if (allTime.get(userId) >= 36000*level7 && allTime.get(userId) < 36000*level8)
             message.channel.send(`${message.member.user.username} du bist Level 7.`);
 
-        if (allTime.get(userId) >= 615093 && allTime.get(userId) < 922639)
+        if (allTime.get(userId) >= 36000*level8 && allTime.get(userId) < 36000*level9)
             message.channel.send(`${message.member.user.username} du bist Level 8.`);
 
-        if (allTime.get(userId) >= 922639 && allTime.get(userId) < 1383958)
+        if (allTime.get(userId) >= 36000*level9 && allTime.get(userId) < 36000*level10)
             message.channel.send(`${message.member.user.username} du bist Level 9.`);
 
-        if (allTime.get(userId) >= 1383958)
+        if (allTime.get(userId) >= 36000*level10)
             message.channel.send(`${message.member.user.username} du bist Level 10.`);
     }
 });
-
 
 
     // Funktion um alltime zu tracken + lvl anzeige
@@ -89,10 +97,24 @@ client.on('messageCreate', function (message) {
     client.on('voiceStateUpdate', (oldState, newState) => {
         const userId = oldState.member.user.id;
         const username = oldState.member.user.username;
-    
+        const level2 = 1.5
+        const level3 = 1.5*1.5
+        const level4 = 1.5*1.5*1.5
+        const level5 = 1.5*1.5*1.5*1.5
+        const level6 = 1.5*1.5*1.5*1.5*1.5
+        const level7 = 1.5*1.5*1.5*1.5*1.5*1.5
+        const level8 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5
+        const level9 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+        const level10 = 1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5*1.5
+
+
+
+
         if (!allTime.has(userId)) {
             allTime.set(userId, 0)
         }
+
+        //allTime.set(userId, 80995)
     
         if (oldState.channelId === null && newState.channelId !== null) {
             const iid = setInterval(function () {
@@ -103,43 +125,47 @@ client.on('messageCreate', function (message) {
                 clearInterval(iid)
             }   
 
+                /*if (allTime.get(userId) === 5){
+                client.channels.cache.get('948618213049114686').send(`${username} hat Level 0 erreicht. Herzlichen Glückwunsch!`)
+                }*/
+
                 if (allTime.get(userId) === 36000){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 1 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 54000){
+                if (allTime.get(userId) === 36000*level2){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 2 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 81000){
+                if (allTime.get(userId) === 36000*level3){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 3 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 121500){
+                if (allTime.get(userId) === 36000*level4){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 4 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 182250){
+                if (allTime.get(userId) === 36000*level5){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 5 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 273375){
+                if (allTime.get(userId) === 36000*level6){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 6 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 410062){
+                if (allTime.get(userId) === 36000*level7){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 7 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 615093){
+                if (allTime.get(userId) === 36000*level8){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 8 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 922639){
+                if (allTime.get(userId) === 36000*level9){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 9 erreicht. Herzlichen Glückwunsch!`)
                 }
 
-                if (allTime.get(userId) === 1383958){
+                if (allTime.get(userId) === 36000*level10){
                     client.channels.cache.get('948618213049114686').send(`${username} hat Level 10 erreicht. Herzlichen Glückwunsch!`)
                 }
 
